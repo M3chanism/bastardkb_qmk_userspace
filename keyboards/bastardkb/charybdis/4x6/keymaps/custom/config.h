@@ -43,7 +43,7 @@
 #define PERMISSIVE_HOLD // overriden by hold on other key press
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
-#define FLOW_TAP_TERM 175
+#define FLOW_TAP_TERM 100
 #define QUICK_TAP_TERM 120  // defaults to TAPPING_TERM, delay for double tap to repeat
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY // only apply to layer tap thumb keys
 // #define HOLD_ON_OTHER_KEY_PRESS // Better to enable only for layer taps
