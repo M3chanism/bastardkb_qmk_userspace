@@ -41,9 +41,9 @@
 // see: https://docs.qmk.fm/tap_hold
 // #define CHORDAL_HOLD // Merged into qmk on Jan 27, 2025. Not available on Bastard Keyboards fork.
 #define PERMISSIVE_HOLD // overriden by hold on other key press
-#define TAPPING_TERM 200
+#define TAPPING_TERM 200 // register hold after X ms delay
 #define TAPPING_TERM_PER_KEY
-#define FLOW_TAP_TERM 100
+#define FLOW_TAP_TERM 100 // disables holds when key is pressed X ms after previous key
 #define QUICK_TAP_TERM 120  // defaults to TAPPING_TERM, delay for double tap to repeat
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY // only apply to layer tap thumb keys
 // #define HOLD_ON_OTHER_KEY_PRESS // Better to enable only for layer taps
