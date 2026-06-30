@@ -134,6 +134,23 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+// Allow mouse layer to function properly by excluding PT_C and PT_COMM from CHORDAL_HOLD
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                      uint16_t other_keycode, keyrecord_t* other_record) {
+    // Example: disable chordal-hold logic (always use default) except for
+    // your home-row mods, which you want strictly opposite-hands.
+    switch (tap_hold_keycode) {
+        case HM_A: case HM_S: case HM_D: case HM_F:
+        case HM_J: case HM_K: case HM_L: case HM_QT:
+            return get_chordal_hold_default(tap_hold_record, other_record);
+        default:
+          // All other keys
+          /* case PT_C: */
+          /* case PT_COMM: */
+            return true;  // bypass chordal-hold for everything else
+    }
+}
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT(
