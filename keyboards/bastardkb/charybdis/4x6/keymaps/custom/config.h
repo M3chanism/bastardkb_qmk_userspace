@@ -39,7 +39,7 @@
 
 // for homerow mods
 // see: https://docs.qmk.fm/tap_hold
-// #define CHORDAL_HOLD // Merged into qmk on Jan 27, 2025. Not available on Bastard Keyboards fork.
+#define CHORDAL_HOLD // Merged into qmk on Jan 27, 2025. Only available on bkb-develop branch
 #define PERMISSIVE_HOLD // overriden by hold on other key press
 #define TAPPING_TERM 200 // register hold after X ms delay
 #define TAPPING_TERM_PER_KEY
