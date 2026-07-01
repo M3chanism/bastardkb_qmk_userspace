@@ -65,24 +65,24 @@ static uint16_t auto_pointer_layer_timer = 0;
 #endif // !POINTING_DEVICE_ENABLE
 
 // Home row mod definitions
-#define HM_A  MT(MOD_LCTL, KC_A)
-#define HM_S  MT(MOD_LGUI, KC_S)
-#define HM_D  MT(MOD_LALT, KC_D)
+#define HM_A  MT(MOD_LGUI, KC_A)
+#define HM_S  MT(MOD_LALT, KC_S)
+#define HM_D  MT(MOD_LCTL, KC_D)
 #define HM_F  MT(MOD_LSFT, KC_F)
 #define HM_J  MT(MOD_RSFT, KC_J)
-#define HM_K  MT(MOD_RALT, KC_K)
-#define HM_L  MT(MOD_RGUI, KC_L)
-#define HM_QT MT(MOD_RCTL, KC_QUOT)
+#define HM_K  MT(MOD_RCTL, KC_K)
+#define HM_L  MT(MOD_RALT, KC_L)
+#define HM_QT MT(MOD_RGUI, KC_QUOT)
 
 // Modifier definitions
-#define MOD_A  MOD_LCTL
-#define MOD_S  MOD_LGUI
-#define MOD_D  MOD_LALT
+#define MOD_A  MOD_LGUI
+#define MOD_S  MOD_LALT
+#define MOD_D  MOD_LCTL
 #define MOD_F  MOD_LSFT
 #define MOD_J  MOD_RSFT
-#define MOD_K  MOD_RALT
-#define MOD_L  MOD_RGUI
-#define MOD_QT MOD_RCTL
+#define MOD_K  MOD_RCTL
+#define MOD_L  MOD_RALT
+#define MOD_QT MOD_RGUI
 
 
 // Set tap hold delay for each modifier individually
