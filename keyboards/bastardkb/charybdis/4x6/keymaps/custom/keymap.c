@@ -65,14 +65,25 @@ static uint16_t auto_pointer_layer_timer = 0;
 #endif // !POINTING_DEVICE_ENABLE
 
 // Home row mod definitions
-#define HM_A  MT(MOD_LALT, KC_A)
-#define HM_S  MT(MOD_LCTL, KC_S)
-#define HM_D  MT(MOD_LGUI, KC_D)
+#define HM_A  MT(MOD_LCTL, KC_A)
+#define HM_S  MT(MOD_LGUI, KC_S)
+#define HM_D  MT(MOD_LALT, KC_D)
 #define HM_F  MT(MOD_LSFT, KC_F)
 #define HM_J  MT(MOD_RSFT, KC_J)
-#define HM_K  MT(MOD_RGUI, KC_K)
-#define HM_L  MT(MOD_RCTL, KC_L)
-#define HM_QT MT(MOD_RALT, KC_QUOT)
+#define HM_K  MT(MOD_RALT, KC_K)
+#define HM_L  MT(MOD_RGUI, KC_L)
+#define HM_QT MT(MOD_RCTL, KC_QUOT)
+
+// Modifier definitions
+#define MOD_A  MOD_LCTL
+#define MOD_S  MOD_LGUI
+#define MOD_D  MOD_LALT
+#define MOD_F  MOD_LSFT
+#define MOD_J  MOD_RSFT
+#define MOD_K  MOD_RALT
+#define MOD_L  MOD_RGUI
+#define MOD_QT MOD_RCTL
+
 
 // Set tap hold delay for each modifier individually
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_keycode) {
@@ -174,7 +185,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO, KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_LALT, KC_LCTL, KC_LGUI, KC_LSFT, KC_NO,      KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_DEL,  KC_NO,
+        KC_NO,    MOD_A,   MOD_S,   MOD_D,   MOD_F,   KC_NO,      KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_DEL,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -189,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,   KC_NO,   KC_NO, KC_NO, DPI_RMOD, S_D_RMOD,      S_D_MOD,  DPI_MOD, KC_NO,   KC_NO,   KC_NO, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,  KC_LALT, KC_LCTL, KC_LGUI, KC_LSFT,  KC_NO,       KC_NO, KC_RSFT, KC_RGUI, KC_RCTL, KC_RALT, KC_NO,
+        KC_NO,  KC_LALT, KC_LCTL, KC_LGUI, KC_LSFT,  KC_NO,       KC_NO,     MOD_J, MOD_K,   MOD_L,  MOD_QT, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,  SNIPING, KC_TRNS, DRGSCRL, KC_NO,       KC_NO,   DRGSCRL, KC_TRNS, SNIPING, KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -219,7 +230,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_LBRC,  KC_7,    KC_8,    KC_9, KC_RBRC,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_SCLN,  KC_4,    KC_5,    KC_6, KC_PEQL,      KC_NO,   KC_RSFT, KC_RGUI, KC_RCTL, KC_RALT, KC_NO,
+        KC_NO,    KC_SCLN,  KC_4,    KC_5,    KC_6, KC_PEQL,      KC_NO,   MOD_J,   MOD_K,   MOD_L, MOD_QT,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,     KC_GRV,  KC_1,    KC_2,    KC_3, KC_BSLS,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -234,7 +245,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO, S(KC_LBRC), S(KC_7), S(KC_8), S(KC_9), S(KC_RBRC), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_NO, S(KC_SCLN), S(KC_4), S(KC_5), S(KC_6), KC_PPLS,    KC_NO,   KC_RSFT, KC_RGUI, KC_RCTL, KC_RALT, KC_NO,
+       KC_NO, S(KC_SCLN), S(KC_4), S(KC_5), S(KC_6), KC_PPLS,    KC_NO,   MOD_J,   MOD_K,   MOD_L, MOD_QT,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO, S(KC_GRV),  S(KC_1), S(KC_2), S(KC_3), S(KC_BSLS), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -249,7 +260,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_SCRL,   KC_F7,   KC_F8,   KC_F9,  KC_F12, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,  KC_LALT, KC_LCTL, KC_LGUI, KC_LSFT,   KC_NO,    KC_PSCR,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
+        KC_NO,    MOD_A,   MOD_S,   MOD_D,   MOD_F,   KC_NO,    KC_PSCR,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_PAUS,   KC_F1,   KC_F2,   KC_F3,  KC_F10, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -264,7 +275,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_LBRC,   KC_P7,   KC_P8,   KC_P9, KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_PPLS,   KC_P4,   KC_P5,   KC_P6, KC_PMNS, KC_PEQL,
+       RGB_TOG,   MOD_A,   MOD_S,   MOD_D,   MOD_F, XXXXXXX,    KC_PPLS,   KC_P4,   KC_P5,   KC_P6, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -279,7 +290,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_MNXT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_MPLY, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, KC_MUTE,
+       KC_MPLY, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX,   MOD_J,   MOD_K,   MOD_L,  MOD_QT, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_MPRV, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
