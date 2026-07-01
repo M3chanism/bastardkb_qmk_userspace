@@ -75,14 +75,14 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define HM_QT MT(MOD_RGUI, KC_QUOT)
 
 // Modifier definitions
-#define MOD_A  MOD_LGUI
-#define MOD_S  MOD_LALT
-#define MOD_D  MOD_LCTL
-#define MOD_F  MOD_LSFT
-#define MOD_J  MOD_RSFT
-#define MOD_K  MOD_RCTL
-#define MOD_L  MOD_RALT
-#define MOD_QT MOD_RGUI
+#define MOD_A  KC_LGUI
+#define MOD_S  KC_LALT
+#define MOD_D  KC_LCTL
+#define MOD_F  KC_LSFT
+#define MOD_J  KC_RSFT
+#define MOD_K  KC_RCTL
+#define MOD_L  KC_RALT
+#define MOD_QT KC_RGUI
 
 
 // Set tap hold delay for each modifier individually
@@ -200,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,   KC_NO,   KC_NO, KC_NO, DPI_RMOD, S_D_RMOD,      S_D_MOD,  DPI_MOD, KC_NO,   KC_NO,   KC_NO, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,  KC_LALT, KC_LCTL, KC_LGUI, KC_LSFT,  KC_NO,       KC_NO,     MOD_J, MOD_K,   MOD_L,  MOD_QT, KC_NO,
+        KC_NO,   MOD_A,   MOD_S, MOD_D,    MOD_F,    KC_NO,       KC_NO,     MOD_J, MOD_K,   MOD_L,  MOD_QT, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,  SNIPING, KC_TRNS, DRGSCRL, KC_NO,       KC_NO,   DRGSCRL, KC_TRNS, SNIPING, KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
