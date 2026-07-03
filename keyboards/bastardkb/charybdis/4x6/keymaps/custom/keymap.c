@@ -51,11 +51,11 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define RAISE MO(LAYER_RAISE)
 #define PT_C LT(LAYER_POINTER, KC_C)
 #define PT_COMM LT(LAYER_POINTER, KC_COMM)
-#define ESC_MEDIA LT(LAYER_MEDIA, KC_ESC)
-#define SPC_NAV LT(LAYER_NAV, KC_SPC)
-#define TAB_FUN LT(LAYER_FUNCTION, KC_TAB)
-#define ENT_SYM LT(LAYER_SYMBOL, KC_ENT)
-#define BSP_NUM LT(LAYER_NUMBER, KC_BSPC)
+#define TH_L1 LT(LAYER_MEDIA, KC_ESC)
+#define TH_L2 LT(LAYER_NAV, KC_SPC)
+#define TH_L3 LT(LAYER_FUNCTION, KC_TAB)
+#define TH_R1 LT(LAYER_SYMBOL, KC_ENT)
+#define TH_R2 LT(LAYER_NUMBER, KC_BSPC)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -132,11 +132,11 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         // Thumb layer-tap keys: hold immediately on another key press.
-        case ESC_MEDIA:
-        case SPC_NAV:
-        case TAB_FUN:
-        case ENT_SYM:
-        case BSP_NUM:
+        case TH_L1:
+        case TH_L2:
+        case TH_L3:
+        case TH_R1:
+        case TH_R2:
             return true;
         // Everything else (incl. mod-taps and pointer taps PT_C/PT_COMM):
         // default per-key behavior (no instant hold).
@@ -174,7 +174,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_Z,    KC_X,    PT_C,    KC_V,    KC_B,       KC_N,    KC_M, PT_COMM,  KC_DOT, KC_SLSH,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                           ESC_MEDIA, SPC_NAV,      TAB_FUN,      ENT_SYM,  BSP_NUM,
+                                        TH_L1, TH_L2, TH_L3,      TH_R1, TH_R2,
                                         LOWER,        RAISE,      KC_NO
   //      ╰─────────────────────────────────────────────────╯ ╰──────────────────────────────────────╯
   ),
