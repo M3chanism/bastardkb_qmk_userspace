@@ -196,9 +196,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_POINTER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       QK_BOOT, EE_CLR,   KC_NO, KC_NO,    KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  EE_CLR, QK_BOOT,
+        KC_NO,   KC_NO,   KC_NO,  KC_NO,   KC_NO,    KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,   KC_NO,   KC_NO, KC_NO, DPI_RMOD, S_D_RMOD,      S_D_MOD,  DPI_MOD, KC_NO,   KC_NO,   KC_NO, KC_NO,
+        KC_NO, QK_BOOT,  EE_CLR, KC_NO, DPI_RMOD, S_D_RMOD,      S_D_MOD,  DPI_MOD, KC_NO,  EE_CLR, QK_BOOT, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,   MOD_A,   MOD_S, MOD_D,    MOD_F,    KC_NO,       KC_NO,     MOD_J, MOD_K,   MOD_L,  MOD_QT, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -215,7 +215,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      RGB_RMOD, RGB_VAD, RGB_VAI, RGB_MOD, KC_NO, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO, KC_MPRV, KC_VOLU, KC_VOLD, KC_MNXT,      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO, KC_NO,
+        KC_NO,  KC_MUTE, KC_MPRV, KC_VOLU, KC_VOLD, KC_MNXT,      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MUTE, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -258,13 +258,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_SCRL,   KC_F7,   KC_F8,   KC_F9,  KC_F12, KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_PSCR,   KC_F7,   KC_F8,   KC_F9,  KC_F12, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    MOD_A,   MOD_S,   MOD_D,   MOD_F,   KC_NO,    KC_PSCR,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
+        KC_NO,    MOD_A,   MOD_S,   MOD_D,   MOD_F,   KC_NO,    KC_SCRL,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_PAUS,   KC_F1,   KC_F2,   KC_F3,  KC_F10, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                    KC_NO, KC_NO,   KC_TRNS,     KC_NO,  KC_INS,
+                                    KC_NO, KC_NO,   KC_TRNS,     KC_APP,  KC_INS,
                                            KC_NO,     KC_NO,     KC_NO
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
