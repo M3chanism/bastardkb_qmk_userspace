@@ -84,6 +84,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define MOD_L  KC_RALT
 #define MOD_QT KC_RGUI
 
+// copy, cut, paste undo, redo
+#define M_REDO LCTL(KC_Y)
+#define M_PASTE LCTL(KC_V)
+#define M_COPY LCTL(KC_C)
+#define M_CUT  LCTL(KC_X)
+#define M_UNDO LCTL(KC_Z)
 
 // Set tap hold delay for each modifier individually
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_keycode) {
@@ -183,11 +189,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO, KC_NO,  KC_NO,  KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_REDO,  M_PASTE, M_COPY,  M_CUT, M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    MOD_A,   MOD_S,   MOD_D,   MOD_F,   KC_NO,      KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_DEL,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_NO,  KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_INS, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                    KC_NO,  KC_TRNS,   KC_NO,     KC_ENT, KC_BSPC,
                                              KC_NO,   KC_NO,     KC_NO
@@ -196,13 +202,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_POINTER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_NO,   KC_NO,   KC_NO,  KC_NO,   KC_NO,    KC_NO,       KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
+        KC_NO,   KC_NO,   KC_NO,  KC_NO,   KC_NO,    KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO, QK_BOOT,  EE_CLR, KC_NO, DPI_RMOD, S_D_RMOD,      S_D_MOD,  DPI_MOD, KC_NO,  EE_CLR, QK_BOOT, KC_NO,
+        KC_NO, QK_BOOT,  EE_CLR,  KC_NO,   KC_NO,    KC_NO,      M_REDO, M_PASTE,  M_COPY,   M_CUT,  M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,   MOD_A,   MOD_S, MOD_D,    MOD_F,    KC_NO,       KC_NO,     MOD_J, MOD_K,   MOD_L,  MOD_QT, KC_NO,
+        KC_NO,   MOD_A,   MOD_S, DPI_RMOD, S_D_RMOD, KC_NO,      KC_NO,  S_D_MOD, DPI_MOD,   KC_NO,   KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,  SNIPING, KC_TRNS, DRGSCRL, KC_NO,       KC_NO,   DRGSCRL, KC_TRNS, SNIPING, KC_NO,  KC_NO,
+        KC_NO,   KC_NO, SNIPING, KC_TRNS, DRGSCRL,   KC_NO,      KC_NO,  DRGSCRL, KC_TRNS, SNIPING,   KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                          KC_MS_BTN2, KC_MS_BTN1, KC_MS_BTN3,      KC_MS_BTN3,  KC_MS_BTN1,
                                           KC_NO,      KC_NO,      KC_NO
