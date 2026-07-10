@@ -66,23 +66,23 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 // Home row mod definitions
 #define HM_A  MT(MOD_LGUI, KC_A)
-#define HM_S  MT(MOD_LALT, KC_S)
-#define HM_D  MT(MOD_LCTL, KC_D)
-#define HM_F  MT(MOD_LSFT, KC_F)
-#define HM_J  MT(MOD_RSFT, KC_J)
-#define HM_K  MT(MOD_RCTL, KC_K)
-#define HM_L  MT(MOD_RALT, KC_L)
-#define HM_QT MT(MOD_RGUI, KC_QUOT)
+#define HM_R  MT(MOD_LALT, KC_R)
+#define HM_S  MT(MOD_LCTL, KC_S)
+#define HM_T  MT(MOD_LSFT, KC_T)
+#define HM_N  MT(MOD_RSFT, KC_N)
+#define HM_E  MT(MOD_RCTL, KC_E)
+#define HM_I  MT(MOD_RALT, KC_I)
+#define HM_O  MT(MOD_RGUI, KC_O)
 
 // Modifier definitions
 #define MOD_A  KC_LGUI
-#define MOD_S  KC_LALT
-#define MOD_D  KC_LCTL
-#define MOD_F  KC_LSFT
-#define MOD_J  KC_RSFT
-#define MOD_K  KC_RCTL
-#define MOD_L  KC_RALT
-#define MOD_QT KC_RGUI
+#define MOD_R  KC_LALT
+#define MOD_S  KC_LCTL
+#define MOD_T  KC_LSFT
+#define MOD_N  KC_RSFT
+#define MOD_E  KC_RCTL
+#define MOD_I  KC_RALT
+#define MOD_O  KC_RGUI
 
 // copy, cut, paste undo, redo
 #define M_REDO LCTL(KC_Y)
@@ -95,17 +95,17 @@ static uint16_t auto_pointer_layer_timer = 0;
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_keycode) {
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
       switch (keycode) {
-          case HM_F:
-          case HM_J:
+          case HM_T:
+          case HM_N:
               return 0;
-          // case HM_D:
-          // case HM_K:
-          //     return FLOW_TAP_TERM - 25; // subtract 25ms from global value
           // case HM_S:
-          // case HM_L:
+          // case HM_E:
+          //     return FLOW_TAP_TERM - 25; // subtract 25ms from global value
+          // case HM_R:
+          // case HM_I:
           //     return 150;
           // case HM_A:
-          // case HM_QT:
+          // case HM_O:
           //     return 150;
           default:
               return FLOW_TAP_TERM;  // use the global macro directly
@@ -118,13 +118,13 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case HM_A:
-        case HM_QT:   // pinky: slow, give more time
+        case HM_O:   // pinky: slow, give more time
             return TAPPING_TERM + 45;
-        case HM_S:
-        case HM_L:    // ring
+        case HM_R:
+        case HM_I:    // ring
             return TAPPING_TERM + 20;
-        case HM_F:
-        case HM_J:    // index shifts: fast, can be shorter
+        case HM_S:
+        case HM_E:    // index shifts: fast, can be shorter
             return TAPPING_TERM - 30;
         default:
             return TAPPING_TERM;
@@ -157,8 +157,8 @@ bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
     // Example: disable chordal-hold logic (always use default) except for
     // your home-row mods, which you want strictly opposite-hands.
     switch (tap_hold_keycode) {
-        case HM_A: case HM_S: case HM_D: case HM_F:
-        case HM_J: case HM_K: case HM_L: case HM_QT:
+        case HM_A: case HM_R: case HM_S: case HM_T:
+        case HM_N: case HM_E: case HM_I: case HM_O:
             return get_chordal_hold_default(tap_hold_record, other_record);
         default:
           // All other keys
@@ -174,11 +174,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,   KC_NO,
+        KC_NO,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    HM_A,    HM_S,    HM_D,    HM_F,    KC_G,       KC_H,    HM_J,    HM_K,    HM_L,  HM_QT,   KC_NO,
+        KC_NO,    HM_A,    HM_R,    HM_S,    HM_T,    KC_G,       KC_M,    HM_N,    HM_E,    HM_I,    HM_O,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_Z,    KC_X,    PT_C,    KC_V,    KC_B,       KC_N,    KC_M, PT_COMM,  KC_DOT, KC_SLSH,  KC_NO,
+        KC_NO,    KC_Z,    KC_X,    PT_C,    KC_D,    KC_V,       KC_K,    KC_H, PT_COMM,  KC_DOT, KC_SLSH,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                         TH_L1, TH_L2, TH_L3,      TH_R1, TH_R2,
                                         LOWER,        RAISE,      KC_NO
@@ -191,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_REDO,  M_PASTE, M_COPY,  M_CUT, M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    MOD_A,   MOD_S,   MOD_D,   MOD_F,   KC_NO,      KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_DEL,  KC_NO,
+        KC_NO,    MOD_A,   MOD_R,   MOD_S,   MOD_T,   KC_NO,      KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_DEL,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_INS, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -206,7 +206,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO, QK_BOOT,  EE_CLR,  KC_NO,   KC_NO,    KC_NO,      M_REDO, M_PASTE,  M_COPY,   M_CUT,  M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,   MOD_A,   MOD_S, DPI_RMOD, S_D_RMOD, KC_NO,      KC_NO,  S_D_MOD, DPI_MOD,   KC_NO,   KC_NO,  KC_NO,
+        KC_NO,   MOD_A,   MOD_R, DPI_RMOD, S_D_RMOD, KC_NO,      KC_NO,  S_D_MOD, DPI_MOD,   KC_NO,   KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,   KC_NO, SNIPING, KC_TRNS, DRGSCRL,   KC_NO,      KC_NO,  DRGSCRL, KC_TRNS, SNIPING,   KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -236,7 +236,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_LBRC,  KC_7,    KC_8,    KC_9, KC_RBRC,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_SCLN,  KC_4,    KC_5,    KC_6, KC_PEQL,      KC_NO,   MOD_J,   MOD_K,   MOD_L, MOD_QT,  KC_NO,
+        KC_NO,    KC_SCLN,  KC_4,    KC_5,    KC_6, KC_PEQL,      KC_NO,   MOD_N,   MOD_E,   MOD_I, MOD_O,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,     KC_GRV,  KC_1,    KC_2,    KC_3, KC_BSLS,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -251,7 +251,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO, S(KC_LBRC), S(KC_7), S(KC_8), S(KC_9), S(KC_RBRC), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_NO, S(KC_SCLN), S(KC_4), S(KC_5), S(KC_6), KC_PPLS,    KC_NO,   MOD_J,   MOD_K,   MOD_L, MOD_QT,  KC_NO,
+       KC_NO, S(KC_SCLN), S(KC_4), S(KC_5), S(KC_6), KC_PPLS,    KC_NO,   MOD_N,   MOD_E,   MOD_I, MOD_O,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO, S(KC_GRV),  S(KC_1), S(KC_2), S(KC_3), S(KC_BSLS), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -266,7 +266,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_PSCR,   KC_F7,   KC_F8,   KC_F9,  KC_F12, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    MOD_A,   MOD_S,   MOD_D,   MOD_F,   KC_NO,    KC_SCRL,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
+        KC_NO,    MOD_A,   MOD_R,   MOD_S,   MOD_T,   KC_NO,    KC_SCRL,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_PAUS,   KC_F1,   KC_F2,   KC_F3,  KC_F10, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -281,7 +281,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_LBRC,   KC_P7,   KC_P8,   KC_P9, KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG,   MOD_A,   MOD_S,   MOD_D,   MOD_F, XXXXXXX,    KC_PPLS,   KC_P4,   KC_P5,   KC_P6, KC_PMNS, KC_PEQL,
+       RGB_TOG,   MOD_A,   MOD_R,   MOD_S,   MOD_T, XXXXXXX,    KC_PPLS,   KC_P4,   KC_P5,   KC_P6, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -296,7 +296,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_MNXT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_MPLY, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX,   MOD_J,   MOD_K,   MOD_L,  MOD_QT, KC_MUTE,
+       KC_MPLY, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX,   MOD_N,   MOD_E,   MOD_I,  MOD_O, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_MPRV, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
