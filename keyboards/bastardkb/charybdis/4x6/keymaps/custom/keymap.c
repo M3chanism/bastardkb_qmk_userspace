@@ -123,8 +123,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case HM_R:
         case HM_I:    // ring
             return TAPPING_TERM + 20;
-        case HM_S:
-        case HM_E:    // index shifts: fast, can be shorter
+        case HM_T:
+        case HM_N:    // index shifts: fast, can be shorter
             return TAPPING_TERM - 30;
         default:
             return TAPPING_TERM;
