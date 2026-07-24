@@ -234,11 +234,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_LBRC,  KC_7,    KC_8,    KC_9, KC_RBRC,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_SCLN,  KC_4,    KC_5,    KC_6,  KC_EQL,      KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
+        KC_NO,    KC_COMM,  KC_4,    KC_5,    KC_6,  KC_EQL,      KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,     KC_GRV,  KC_1,    KC_2,    KC_3, KC_BSLS,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
+        KC_NO,     KC_SCLN,  KC_1,    KC_2,    KC_3, KC_BSLS,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                   KC_DOT,   KC_0,  KC_COMM,      KC_NO,  KC_TRNS,
+                                    KC_DOT,   KC_0,  KC_GRV,      KC_NO,  KC_TRNS,
                                            KC_NO,     KC_NO,      KC_NO
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
@@ -249,11 +249,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO, S(KC_LBRC), S(KC_7), S(KC_8), S(KC_9), S(KC_RBRC), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_NO, S(KC_SCLN), S(KC_4), S(KC_5), S(KC_6), S(KC_EQL),  KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
+       KC_NO, KC_QUES, S(KC_4), S(KC_5), S(KC_6), S(KC_EQL),  KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_NO, S(KC_GRV),  S(KC_1), S(KC_2), S(KC_3), S(KC_BSLS), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
+       KC_NO, S(KC_SCLN),  S(KC_1), S(KC_2), S(KC_3), S(KC_BSLS), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                S(KC_9), S(KC_0),   KC_QUES,      KC_TRNS,  KC_NO,
+                              S(KC_9), S(KC_0),   S(KC_GRV),      KC_TRNS,  KC_NO,
                                            KC_NO,     KC_NO,      KC_NO
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
