@@ -49,8 +49,8 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define LOWER MO(LAYER_LOWER)
 #define RAISE MO(LAYER_RAISE)
-#define PT_C LT(LAYER_POINTER, KC_C)
-#define PT_COMM LT(LAYER_POINTER, KC_COMM)
+#define PT_M LT(LAYER_POINTER, KC_M)
+#define PT_DOT LT(LAYER_POINTER, KC_DOT)
 #define TH_L1 LT(LAYER_MEDIA, KC_ESC)
 #define TH_L2 LT(LAYER_NAV, KC_SPC)
 #define TH_L3 LT(LAYER_FUNCTION, KC_TAB)
@@ -64,25 +64,26 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    define SNIPING KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
-// Home row mod definitions
-#define HM_A  MT(MOD_LGUI, KC_A)
+// Home row mods — Graphite NRTS / HAEI, same physical fingers as before
+// pinky GUI, ring Alt, middle Ctrl, index Shift
+#define HM_N  MT(MOD_LGUI, KC_N)
 #define HM_R  MT(MOD_LALT, KC_R)
-#define HM_S  MT(MOD_LCTL, KC_S)
-#define HM_T  MT(MOD_LSFT, KC_T)
-#define HM_N  MT(MOD_RSFT, KC_N)
-#define HM_E  MT(MOD_RCTL, KC_E)
-#define HM_I  MT(MOD_RALT, KC_I)
-#define HM_O  MT(MOD_RGUI, KC_O)
+#define HM_T  MT(MOD_LCTL, KC_T)
+#define HM_S  MT(MOD_LSFT, KC_S)
+#define HM_H  MT(MOD_RSFT, KC_H)
+#define HM_A  MT(MOD_RCTL, KC_A)
+#define HM_E  MT(MOD_RALT, KC_E)
+#define HM_I  MT(MOD_RGUI, KC_I)
 
-// Modifier definitions
-#define MOD_A  KC_LGUI
+// Dedicated mods (same fingers as HRMs)
+#define MOD_N  KC_LGUI
 #define MOD_R  KC_LALT
-#define MOD_S  KC_LCTL
-#define MOD_T  KC_LSFT
-#define MOD_N  KC_RSFT
-#define MOD_E  KC_RCTL
-#define MOD_I  KC_RALT
-#define MOD_O  KC_RGUI
+#define MOD_T  KC_LCTL
+#define MOD_S  KC_LSFT
+#define MOD_H  KC_RSFT
+#define MOD_A  KC_RCTL
+#define MOD_E  KC_RALT
+#define MOD_I  KC_RGUI
 
 // copy, cut, paste undo, redo
 #define M_REDO LCTL(KC_Y)
@@ -91,22 +92,26 @@ static uint16_t auto_pointer_layer_timer = 0;
 #define M_CUT  LCTL(KC_X)
 #define M_UNDO LCTL(KC_Z)
 
+// Graphite nonstandard shift pairs
+const key_override_t quote_underscore = ko_make_basic(MOD_MASK_SHIFT, KC_QUOT, KC_UNDS);
+const key_override_t comma_question   = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_QUES);
+const key_override_t minus_dquote     = ko_make_basic(MOD_MASK_SHIFT, KC_MINS, KC_DQUO);
+const key_override_t slash_lt         = ko_make_basic(MOD_MASK_SHIFT, KC_SLSH, KC_LT);
+
+const key_override_t *key_overrides[] = {
+    &quote_underscore,
+    &comma_question,
+    &minus_dquote,
+    &slash_lt,
+};
+
 // Set tap hold delay for each modifier individually
 uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_keycode) {
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
       switch (keycode) {
-          case HM_T:
-          case HM_N:
+          case HM_S:
+          case HM_H:
               return 0;
-          // case HM_S:
-          // case HM_E:
-          //     return FLOW_TAP_TERM - 25; // subtract 25ms from global value
-          // case HM_R:
-          // case HM_I:
-          //     return 150;
-          // case HM_A:
-          // case HM_O:
-          //     return 150;
           default:
               return FLOW_TAP_TERM;  // use the global macro directly
       }
@@ -117,14 +122,14 @@ uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t* record, uint16_t prev_
 // Set tapping term for each modifier individually
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case HM_A:
-        case HM_O:   // pinky: slow, give more time
+        case HM_N:
+        case HM_I:   // pinky: slow, give more time
             return TAPPING_TERM + 45;
         case HM_R:
-        case HM_I:    // ring
+        case HM_E:    // ring
             return TAPPING_TERM + 20;
-        case HM_T:
-        case HM_N:    // index shifts: fast, can be shorter
+        case HM_S:
+        case HM_H:    // index shifts: fast, can be shorter
             return TAPPING_TERM - 30;
         default:
             return TAPPING_TERM;
@@ -141,27 +146,22 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case TH_L3:
         case TH_R1:
         case TH_R2:
-        case HM_T: // left shift
-        case HM_N: // right shift
+        case HM_S: // left shift
+        case HM_H: // right shift
             return true;
         default:
             return false;
     }
 }
 
-// Allow mouse layer to function properly by excluding PT_C and PT_COMM from CHORDAL_HOLD
+// Home-row mods use chordal hold (opposite hands); everything else bypasses it.
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
                       uint16_t other_keycode, keyrecord_t* other_record) {
-    // Example: disable chordal-hold logic (always use default) except for
-    // your home-row mods, which you want strictly opposite-hands.
     switch (tap_hold_keycode) {
-        case HM_A: case HM_R: case HM_S: case HM_T:
-        case HM_N: case HM_E: case HM_I: case HM_O:
+        case HM_N: case HM_R: case HM_T: case HM_S:
+        case HM_H: case HM_A: case HM_E: case HM_I:
             return get_chordal_hold_default(tap_hold_record, other_record);
         default:
-          // All other keys
-          /* case PT_C: */
-          /* case PT_COMM: */
             return true;  // bypass chordal-hold for everything else
     }
 }
@@ -172,11 +172,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT,  KC_NO,
+        KC_NO,    KC_B,    KC_L,    KC_D,    KC_W,    KC_Z,    KC_QUOT,    KC_F,    KC_O,    KC_U,   KC_J,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    HM_A,    HM_R,    HM_S,    HM_T,    KC_G,       KC_M,    HM_N,    HM_E,    HM_I,    HM_O,  KC_NO,
+        KC_NO,    HM_N,    HM_R,    HM_T,    HM_S,    KC_G,       KC_Y,    HM_H,    HM_A,    HM_E,   HM_I,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_Z,    KC_X,    PT_C,    KC_D,    KC_V,       KC_K,    KC_H, PT_COMM,  KC_DOT, KC_SLSH,  KC_NO,
+        KC_NO,    KC_Q,    KC_X,    PT_M,    KC_C,    KC_V,       KC_K,    KC_P,  PT_DOT, KC_MINS, KC_SLSH,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                         TH_L1, TH_L2, TH_L3,      TH_R1, TH_R2,
                                         LOWER,        RAISE,      KC_NO
@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_REDO,  M_PASTE, M_COPY,  M_CUT, M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    MOD_A,   MOD_R,   MOD_S,   MOD_T,   KC_NO,      KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_DEL,  KC_NO,
+        KC_NO,    MOD_N,   MOD_R,   MOD_T,   MOD_S,   KC_NO,      KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_DEL,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_INS, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -204,7 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO, QK_BOOT,  EE_CLR,  KC_NO,   KC_NO,    KC_NO,      M_REDO, M_PASTE,  M_COPY,   M_CUT,  M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,   MOD_A,   MOD_R, DPI_RMOD, S_D_RMOD, KC_NO,      KC_NO,  S_D_MOD, DPI_MOD,   KC_NO,   KC_NO,  KC_NO,
+        KC_NO,   MOD_N,   MOD_R, DPI_RMOD, S_D_RMOD, KC_NO,      KC_NO,  S_D_MOD, DPI_MOD,   KC_NO,   KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,   KC_NO, SNIPING, KC_TRNS, DRGSCRL,   KC_NO,      KC_NO,  DRGSCRL, KC_TRNS, SNIPING,   KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -234,11 +234,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_LBRC,  KC_7,    KC_8,    KC_9, KC_RBRC,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_SCLN,  KC_4,    KC_5,    KC_6, KC_PEQL,      KC_NO,   MOD_N,   MOD_E,   MOD_I, MOD_O,  KC_NO,
+        KC_NO,    KC_SCLN,  KC_4,    KC_5,    KC_6,  KC_EQL,      KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,     KC_GRV,  KC_1,    KC_2,    KC_3, KC_BSLS,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  KC_PDOT, KC_P0,   KC_PMNS,      KC_NO,  KC_TRNS,
+                                   KC_DOT,   KC_0,  KC_COMM,      KC_NO,  KC_TRNS,
                                            KC_NO,     KC_NO,      KC_NO
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
@@ -249,11 +249,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO, S(KC_LBRC), S(KC_7), S(KC_8), S(KC_9), S(KC_RBRC), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_NO, S(KC_SCLN), S(KC_4), S(KC_5), S(KC_6), KC_PPLS,    KC_NO,   MOD_N,   MOD_E,   MOD_I, MOD_O,  KC_NO,
+       KC_NO, S(KC_SCLN), S(KC_4), S(KC_5), S(KC_6), S(KC_EQL),  KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO, S(KC_GRV),  S(KC_1), S(KC_2), S(KC_3), S(KC_BSLS), KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                               S(KC_9), S(KC_0), S(KC_MINS),      KC_TRNS,  KC_NO,
+                                S(KC_9), S(KC_0),   KC_QUES,      KC_TRNS,  KC_NO,
                                            KC_NO,     KC_NO,      KC_NO
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
@@ -264,7 +264,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_PSCR,   KC_F7,   KC_F8,   KC_F9,  KC_F12, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    MOD_A,   MOD_R,   MOD_S,   MOD_T,   KC_NO,    KC_SCRL,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
+        KC_NO,    MOD_N,   MOD_R,   MOD_T,   MOD_S,   KC_NO,    KC_SCRL,   KC_F4,   KC_F5,   KC_F6,  KC_F11, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_PAUS,   KC_F1,   KC_F2,   KC_F3,  KC_F10, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -279,7 +279,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_LBRC,   KC_P7,   KC_P8,   KC_P9, KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       RGB_TOG,   MOD_A,   MOD_R,   MOD_S,   MOD_T, XXXXXXX,    KC_PPLS,   KC_P4,   KC_P5,   KC_P6, KC_PMNS, KC_PEQL,
+       RGB_TOG,   MOD_N,   MOD_R,   MOD_T,   MOD_S, XXXXXXX,    KC_PPLS,   KC_P4,   KC_P5,   KC_P6, KC_PMNS, KC_PEQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
       RGB_RMOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_PAST,   KC_P1,   KC_P2,   KC_P3, KC_PSLS, KC_PDOT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
@@ -294,7 +294,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_MNXT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLU,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_MPLY, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX,   MOD_N,   MOD_E,   MOD_I,  MOD_O, KC_MUTE,
+       KC_MPLY, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX,   MOD_H,   MOD_A,   MOD_E,  MOD_I, KC_MUTE,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_MPRV, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
