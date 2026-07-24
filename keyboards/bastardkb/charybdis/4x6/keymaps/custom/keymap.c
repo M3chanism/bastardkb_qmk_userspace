@@ -187,11 +187,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_CUT,  KC_PGUP,   KC_UP,  KC_PGDN, M_REDO,  KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_CUT,  M_COPY,   KC_UP,  M_PASTE, M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    MOD_N,   MOD_R,   MOD_T,   MOD_S,   KC_NO,      M_COPY, KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  KC_NO,
+        KC_NO,    MOD_N,   MOD_R,   MOD_T,   MOD_S,   KC_NO,      KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_PASTE, KC_HOME, KC_DEL, KC_END, M_UNDO, KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_PGDN, KC_HOME, KC_DEL, KC_END, M_REDO, KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                    KC_NO,  KC_TRNS,   KC_NO,     KC_ENT, KC_BSPC,
                                              KC_NO,   KC_NO,     KC_NO
