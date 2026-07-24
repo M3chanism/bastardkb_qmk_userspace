@@ -249,11 +249,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_NO,  KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_NO,  KC_COLN,  KC_DLR, KC_PERC, KC_CIRC, KC_PLUS,      KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
+       KC_NO,  KC_QUES,  KC_DLR, KC_PERC, KC_CIRC, KC_PLUS,      KC_NO,   MOD_H,   MOD_A,   MOD_E,  MOD_I,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_NO,  KC_TILD, KC_EXLM,   KC_AT, KC_HASH, KC_PIPE,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
+       KC_NO,  KC_COLN, KC_EXLM,   KC_AT, KC_HASH, KC_PIPE,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  KC_LPRN, KC_RPRN,  KC_NO,      KC_TRNS,  KC_NO,
+                                  KC_LPRN, KC_RPRN, KC_TILD,      KC_TRNS,  KC_NO,
                                            KC_NO,     KC_NO,      KC_NO
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
