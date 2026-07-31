@@ -18,7 +18,7 @@
 
 #ifdef VIA_ENABLE
 /* VIA configuration. */
-#    define DYNAMIC_KEYMAP_LAYER_COUNT 4
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 10
 #endif // VIA_ENABLE
 
 #ifndef __arm__
@@ -34,3 +34,16 @@
 // - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
 // #define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 #endif // POINTING_DEVICE_ENABLE
+
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+
+// for homerow mods
+// see: https://docs.qmk.fm/tap_hold
+#define CHORDAL_HOLD // only resolve as hold if next key is on opposite hand
+#define PERMISSIVE_HOLD // overriden by hold on other key press
+#define TAPPING_TERM 200 // register hold after X ms delay
+#define TAPPING_TERM_PER_KEY
+#define FLOW_TAP_TERM 100 // disables holds when key is pressed X ms after previous key
+#define QUICK_TAP_TERM 120  // defaults to TAPPING_TERM, delay for double tap to repeat
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY // only apply to layer tap thumb keys
+// #define HOLD_ON_OTHER_KEY_PRESS // Better to enable only for layer taps

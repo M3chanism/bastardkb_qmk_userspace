@@ -30,6 +30,7 @@ enum charybdis_keymap_layers {
     LAYER_FUNCTION,
     LAYER_LOWER,
     LAYER_RAISE,
+    LAYER_GAMING,
 };
 
 /** \brief Automatically enable sniping-mode on the pointer layer. */
@@ -49,6 +50,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define LOWER MO(LAYER_LOWER)
 #define RAISE MO(LAYER_RAISE)
+#define TG_GAME TG(LAYER_GAMING)
 #define PT_M LT(LAYER_POINTER, KC_M)
 #define PT_DOT LT(LAYER_POINTER, KC_DOT)
 #define TH_L1 LT(LAYER_MEDIA, KC_ESC)
@@ -179,8 +181,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,    KC_Q,    KC_X,    PT_M,    KC_C,    KC_V,       KC_K,    KC_P,  PT_DOT, KC_MINS, KC_SLSH,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                         TH_L1, TH_L2, TH_L3,      TH_R1, TH_R2,
-                                        LOWER,        RAISE,      KC_NO
-  //      ╰─────────────────────────────────────────────────╯ ╰──────────────────────────────────────╯
+                                        LOWER,        RAISE,      TG_GAME
+  //                            ╰─────────────────────────────────────────────────╯ ╰──────────────────────────────────────╯
   ),
 
   [LAYER_NAV] = LAYOUT(
@@ -299,8 +301,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        KC_MPRV, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  _______, _______, XXXXXXX,    _______, XXXXXXX,
+                                   _______, _______, XXXXXXX,    _______, XXXXXXX,
                                            _______, _______,    XXXXXXX
+  //                            ╰───────────────────────────╯ ╰──────────────────╯
+  ),
+
+  [LAYER_GAMING] = LAYOUT(
+  // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        KC_NO,    KC_B,    KC_L,    KC_D,    KC_W,    KC_Z,    KC_QUOT,    KC_F,    KC_O,    KC_U,   KC_J,  KC_NO,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        KC_NO,    KC_N,    KC_R,    KC_T,    KC_S,    KC_G,       KC_Y,    KC_H,    KC_A,    KC_E,   KC_I,  KC_NO,
+  // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
+        KC_NO,    KC_Q,    KC_X,    KC_M,    KC_C,    KC_V,       KC_K,    KC_P,  KC_DOT, KC_MINS, KC_SLSH,  KC_NO,
+  // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
+                                   KC_ESC,  KC_SPC,  KC_TAB,     KC_ENT, KC_BSPC,
+                                        LOWER,        RAISE,      TG_GAME
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 };
