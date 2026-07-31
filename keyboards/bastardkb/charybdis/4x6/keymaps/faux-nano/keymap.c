@@ -187,13 +187,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NAV] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,    KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_CUT,  M_COPY,   KC_UP,  M_PASTE, M_UNDO,  KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_PASTE, KC_PGUP,  KC_UP, KC_PGDN, M_UNDO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    MOD_N,   MOD_R,   MOD_T,   MOD_S,   KC_NO,      KC_PGUP, KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  KC_NO,
+        KC_NO,    MOD_N,   MOD_R,   MOD_T,   MOD_S,   KC_NO,      M_COPY, KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_PGDN, KC_HOME, KC_DEL, KC_END, M_REDO, KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      M_CUT,  KC_HOME,  KC_DEL,  KC_END, M_REDO,  KC_NO,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                    KC_NO,  KC_TRNS,   KC_NO,     KC_ENT, KC_BSPC,
                                              KC_NO,   KC_NO,     KC_NO
@@ -308,16 +308,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_GAMING] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
+        KC_GRV,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,   KC_0,  KC_EQL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_B,    KC_L,    KC_D,    KC_W,    KC_Z,    KC_QUOT,    KC_F,    KC_O,    KC_U,   KC_J,  KC_NO,
+        KC_TAB,   KC_B,    KC_L,    KC_D,    KC_W,    KC_Z,    KC_QUOT,    KC_F,    KC_O,    KC_U,   KC_J,  KC_SCLN,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_N,    KC_R,    KC_T,    KC_S,    KC_G,       KC_Y,    KC_H,    KC_A,    KC_E,   KC_I,  KC_NO,
+        KC_ESC,   KC_N,    KC_R,    KC_T,    KC_S,    KC_G,       KC_Y,    KC_H,    KC_A,    KC_E,   KC_I,  KC_COMM,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_Q,    KC_X,    KC_M,    KC_C,    KC_V,       KC_K,    KC_P,  KC_DOT, KC_MINS, KC_SLSH,  KC_NO,
+        KC_LSFT,  KC_Q,    KC_X,    KC_M,    KC_C,    KC_V,       KC_K,    KC_P,  KC_DOT, KC_MINS, KC_SLSH, KC_RSFT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                   KC_ESC,  KC_SPC,  KC_TAB,     KC_ENT, KC_BSPC,
-                                        LOWER,        RAISE,      TG_GAME
+                                  KC_BSPC,  KC_SPC, KC_LALT,     KC_LCTL, KC_ENT,
+                                        KC_BSLS,    KC_LGUI,     TG_GAME
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 };
