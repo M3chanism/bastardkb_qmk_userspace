@@ -219,7 +219,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
         KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      RGB_RMOD, RGB_VAD, RGB_VAI, RGB_MOD, KC_NO, KC_NO,
+        KC_NO,    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,   RGB_VAD, RGB_VAI, KC_NO,  KC_NO,  KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         KC_NO,  KC_MUTE, KC_MPRV, KC_VOLU, KC_VOLD, KC_MNXT,      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MUTE, KC_NO,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
@@ -362,8 +362,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             gaming_rgb_on = true;
         }
     } else if (gaming_rgb_on) {
-        rgb_matrix_reload_from_eeprom();
-        gaming_rgb_on     = false;
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+        rgb_matrix_sethsv_noeeprom(0, 255, rgb_matrix_get_val());
+        gaming_rgb_on = false;
     }
 #        endif // RGB_MATRIX_ENABLE
     return state;
@@ -374,4 +375,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 #ifdef RGB_MATRIX_ENABLE
 // Forward-declare this helper function since it is defined in rgb_matrix.c.
 void rgb_matrix_update_pwm_buffers(void);
+
+void keyboard_post_init_user(void) {
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    rgb_matrix_sethsv_noeeprom(0, 255, rgb_matrix_get_val());
+}
 #endif
