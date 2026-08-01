@@ -353,6 +353,19 @@ void matrix_scan_user(void) {
 #    ifdef CHARYBDIS_AUTO_SNIPING_ON_LAYER
 layer_state_t layer_state_set_user(layer_state_t state) {
     charybdis_set_pointer_sniping_enabled(layer_state_cmp(state, CHARYBDIS_AUTO_SNIPING_ON_LAYER));
+#        ifdef RGB_MATRIX_ENABLE
+    static bool gaming_rgb_on = false;
+    if (layer_state_cmp(state, LAYER_GAMING)) {
+        if (!gaming_rgb_on) {
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+            rgb_matrix_sethsv_noeeprom(85, 255, rgb_matrix_get_val());
+            gaming_rgb_on = true;
+        }
+    } else if (gaming_rgb_on) {
+        rgb_matrix_reload_from_eeprom();
+        gaming_rgb_on     = false;
+    }
+#        endif // RGB_MATRIX_ENABLE
     return state;
 }
 #    endif // CHARYBDIS_AUTO_SNIPING_ON_LAYER
